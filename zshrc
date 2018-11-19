@@ -26,6 +26,7 @@ zmodload -i zsh/complist
 unsetopt menu_complete
 unsetopt flowcontrol
 
+setopt auto_cd
 setopt prompt_subst
 setopt always_to_end
 setopt append_history

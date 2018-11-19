@@ -5,20 +5,22 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias rm='rm -i'
 
-# Colorize output, make ls human readable and classify...
-if [[ `uname` == Darwin ]]; then
-  alias dircolors='gdircolors'
-  alias ls='gls --color=auto -hF'
-else
-  alias ls='ls --color=auto -hF'
 
-  # ...and standardize to macOS naming on Linux
-  alias open='xdg-open'
-fi
+alias ls='ls --color=auto -hF'
+alias ll="ls -hlp"
+alias lr="ls -hlptr"
+alias la="ls -halp"
 
-# Disk utility aliases
+# bash-prompt
+PS1='\[`[ $? = 0 ] && X=2 || X=1; tput setaf $X`\]\h\[`tput sgr0`\]:$PWD\n\$ '
+
+# disk utilities
 alias df='df -h'
 alias du='du -h'
+
+# miniconda
+alias sa='source activate'   # shadows /usr/sbin/sa
+alias sd='source deactivate'
 
 # Colorize output and some exclusions
 alias grep="grep --color=auto --exclude-dir={.git,artwork,node_modules,vendor}"
@@ -28,12 +30,21 @@ git_branch() {
   (command git symbolic-ref -q HEAD || command git name-rev --name-only --no-undefined --always HEAD) 2>/dev/null
 }
 
-# Git aliases
-alias g='git'
-alias ga='git add'
+# git
+alias gs='git status '   # but shadows ghostscript
+alias ga='git add '
+alias gb='git branch '
+alias gc='git commit'
+alias gd='git diff'
+alias go='git checkout '
+alias gk='gitk --all&'
+alias gx='gitx --all'
+
+# alias g='git'
+# alias ga='git add'
 alias gaa='git add --all'
-alias gb='git branch'
-alias gc='git commit -v'
+# alias gb='git branch'
+# alias gc='git commit -v'
 alias gca='git commit -a -v'
 alias gcam='git commit -a -v --amend'
 alias gcb='git checkout -b'
@@ -60,36 +71,6 @@ alias POST='http POST'
 alias HEAD='http HEAD'
 
 # `ls` after `cd`
-function cd {
-  builtin cd "$@" && ls
-}
-
-# Run `nvm` init script on demand to avoid constant slow downs
-function nvm {
-  if [ -z ${NVM_DIR+x} ]; then
-    export NVM_DIR="$HOME/.nvm"
-
-    if [ -s "$NVM_DIR/nvm.sh" ]; then
-      source "$NVM_DIR/nvm.sh"
-    elif [ -s "/usr/share/nvm/init-nvm.sh" ]; then
-      source /usr/share/nvm/init-nvm.sh
-    fi
-
-    nvm "$@"
-  fi
-}
-
-# PID Port
-function pp {
-  ss -lptn sport = :$1 | grep -Eo 'pid=[0-9]+' | cut -c5-
-}
-
-# function vim {
-#   BACKGROUND=$(xtermcontrol --get-bg)
-#
-#   if [[ "$BACKGROUND" == "rgb:0000/2b2b/3636" ]]; then
-#     env vim --cmd "let theme = 'dark'" $@
-#   else
-#     env vim --cmd "let theme = 'light'" $@
-#   fi
-# }
+#function cd {
+#  builtin cd "$@" && ls
+#}

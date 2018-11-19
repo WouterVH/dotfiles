@@ -26,10 +26,11 @@ rm -rf \
   "$DOTLOCAL" \
   "$HOME/.bashrc" \
   "$HOME/.gitconfig" \
+  "$HOME/.pdbrc" \
   "$HOME/.screenrc" \
   "$HOME/.vim" \
   "$HOME/.vimrc" \
-  "$HOME/.zshrc"
+  "$HOME/.zshrc" \
 
 mkdir -p \
   "$DOTLOCAL" \
@@ -39,9 +40,11 @@ mkdir -p \
 
 ln -s "$DOTFILES/bashrc" "$HOME/.bashrc"
 ln -s "$DOTFILES/gitconfig" "$HOME/.gitconfig"
+ln -s "$DOTFILES/pdbrc" "$HOME/.pdbrc"
 ln -s "$DOTFILES/screenrc" "$HOME/.screenrc"
 ln -s "$DOTFILES/vimrc" "$HOME/.vimrc"
 ln -s "$DOTFILES/zshrc" "$HOME/.zshrc"
+
 
 $GITCLONE https://github.com/junegunn/fzf.git "$DOTFZF"
 "$DOTFZF/install" --key-bindings --completion --no-update-rc
@@ -60,11 +63,11 @@ done
 VIMPLUGS=(
   "w0rp/ale"
   "editorconfig/editorconfig-vim"
-  "junegunn/fzf.vim"
-  "sheerun/vim-polyglot"
-  "jelera/vim-javascript-syntax"
-  "Quramy/vim-js-pretty-template"
-  "StanAngeloff/php.vim"
+#  "junegunn/fzf.vim"
+#  "sheerun/vim-polyglot"
+#  "jelera/vim-javascript-syntax"
+#  "Quramy/vim-js-pretty-template"
+#  "StanAngeloff/php.vim"
 )
 
 for INDEX in ${!VIMPLUGS[*]}; do

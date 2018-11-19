@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# set PATH to include user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
 export DOTFILES=$HOME/.dotfiles
 export INCLUDES=$HOME/.local/share/dotfiles
 
